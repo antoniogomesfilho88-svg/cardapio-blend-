@@ -1,738 +1,360 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burguer Artesanal Blend - Cardápio Online</title>
-    <style>
-        /* CSS COMPLETO */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background: #1a1a1a;
-            color: white;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            text-align: center;
-            background: #333;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #e0e0e0;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        
-        .header .subtitle {
-            font-size: 1.8em;
-            color: #e0e0e0;
-            font-weight: bold;
-        }
-        
-        .contact-info {
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .categoria {
-            background: #333;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 10px;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .categoria h2 {
-            color: #e0e0e0;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 5px;
-        }
-        
-        .produto {
-            background: #444;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
-        }
-        
-        .produto:hover {
-            transform: translateY(-2px);
-        }
-        
-        .produto-info {
-            flex: 1;
-        }
-        
-        .produto-nome {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #ffffff;
-        }
-        
-        .produto-desc {
-            color: #ccc;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .produto-preco {
-            color: #e0e0e0;
-            font-weight: bold;
-            margin: 0 15px;
-            font-size: 1.1em;
-        }
-        
-        .quantidade {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .btn-quantidade {
-            background: #e0e0e0;
-            color: #1a1a1a;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .btn-quantidade:hover {
-            background: #ffffff;
-        }
-        
-        .quantidade-num {
-            min-width: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        .carrinho {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #e0e0e0;
-            color: #1a1a1a;
-            padding: 15px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(224, 224, 224, 0.3);
-            transition: transform 0.3s;
-            z-index: 100;
-        }
-        
-        .carrinho:hover {
-            transform: scale(1.05);
-            background: #ffffff;
-        }
-        
-        .endereco-loja {
-            background: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .endereco-loja h3 {
-            color: #e0e0e0;
-            margin-bottom: 10px;
-        }
-        
-        /* Estilos para o Modal de Checkout */
-        .modal-container {
-            max-width: 600px;
-            margin: 50px auto 20px auto; 
-            background: #333; 
-            padding: 25px; 
-            border-radius: 10px; 
-            border: 2px solid #e0e0e0;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burguer Artesanal Blend - Cardápio Online</title>
+    <style>
+        /* CSS COMPLETO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            background: #333;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .header .subtitle {
+            font-size: 1.8em;
+            color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        .contact-info {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-left: 4px solid #e0e0e0;
+        }
+        
+        .categoria {
+            background: #333;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #e0e0e0;
+        }
+        
+        .categoria h2 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        
+        .produto {
+            background: #444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        
+        .produto:hover {
+            transform: translateY(-2px);
+        }
+        
+        .produto-info {
+            flex: 1;
+        }
+        
+        .produto-nome {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #ffffff;
+        }
+        
+        .produto-desc {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .produto-preco {
+            color: #e0e0e0;
+            font-weight: bold;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        
+        .quantidade {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-quantidade {
+            background: #e0e0e0;
+            color: #1a1a1a;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn-quantidade:hover {
+            background: #ffffff;
+        }
+        
+        .quantidade-num {
+            min-width: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .carrinho {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e0e0e0;
+            color: #1a1a1a;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(224, 224, 224, 0.3);
+            transition: transform 0.3s;
+            z-index: 100;
+        }
+        
+        .carrinho:hover {
+            transform: scale(1.05);
+            background: #ffffff;
+        }
+        
+        .endereco-loja {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border-left: 4px solid #e0e0e0;
+        }
+        
+        .endereco-loja h3 {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+        
+        /* Estilos para o Modal de Checkout */
+        .modal-container {
+            max-width: 600px;
+            margin: 50px auto 20px auto; 
+            background: #333; 
+            padding: 25px; 
+            border-radius: 10px; 
+            border: 2px solid #e0e0e0;
+        }
 
-        .input-style {
-            width: 100%; 
-            padding: 10px; 
-            border-radius: 5px; 
-            border: none; 
-            background: #555; 
-            color: white;
-        }
-    </style>
+        .input-style {
+            width: 100%; 
+            padding: 10px; 
+            border-radius: 5px; 
+            border: none; 
+            background: #555; 
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>ARTESANAL</h1>
-            <div class="subtitle">-BLEND-</div>
-            <p>O Melhor Blend Artesanal</p>
-        </div>
+    <div class="container">
+        <div class="header">
+            <h1>ARTESANAL</h1>
+            <div class="subtitle">-BLEND-</div>
+            <p>O Melhor Blend Artesanal</p>
+        </div>
 
-        <div class="contact-info">
-            <p>📞 (31) 99212-8891 | 📍 Rua Coniston, 380 - B2</p>
-            <p>🕐 Quinta a Segunda: 18:30-23:00 | 🛵 Entregamos</p>
-        </div>
+        <div class="contact-info">
+            <p>📞 (31) 99212-8891 | 📍 Rua Coniston, 380 - B2</p>
+            <p>🕐 Quinta a Segunda: 18:30-23:00 | 🛵 Entregamos</p>
+        </div>
 
-        <div class="categoria">
-            <h2>🍔 HAMBÚRGUERES</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Simples Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 21,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+        <div class="categoria">
+            <h2>🍔 HAMBÚRGUERES</h2>
+            
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Simples Blend</div>
+                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, molho especial</div>
+                </div>
+                <div class="produto-preco">R$ 21,00</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Clássico Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, picles, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 24,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Clássico Blend</div>
+                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, picles, molho especial</div>
+                </div>
+                <div class="produto-preco">R$ 24,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Salada Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 23,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Salada Blend</div>
+                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial</div>
+                </div>
+                <div class="produto-preco">R$ 23,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Bacon Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 29,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Bacon Blend</div>
+                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, molho especial</div>
+                </div>
+                <div class="produto-preco">R$ 29,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Smach Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, ovo, cebola caramelizada, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 34,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Smach Blend</div>
+                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, ovo, cebola caramelizada, molho especial</div>
+                </div>
+                <div class="produto-preco">R$ 34,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
 
-        <div class="categoria">
-            <h2>🎯 COMBOS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO BACON BLEND 1</div>
-                    <div class="produto-desc">2 Bacon Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 76,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+        <div class="categoria">
+            <h2>🎯 COMBOS</h2>
+            
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">COMBO BACON BLEND 1</div>
+                    <div class="produto-desc">2 Bacon Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
+                </div>
+                <div class="produto-preco">R$ 76,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO BACON BLEND 3</div>
-                    <div class="produto-desc">3 Bacon Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 118,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">COMBO BACON BLEND 3</div>
+                    <div class="produto-desc">3 Bacon Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
+                </div>
+                <div class="produto-preco">R$ 118,50</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO SIMPLES BLEND</div>
-                    <div class="produto-desc">3 Simples Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 89,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">COMBO SIMPLES BLEND</div>
+                    <div class="produto-desc">3 Simples Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
+                </div>
+                <div class="produto-preco">R$ 89,00</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
 
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO SMACH BLEND</div>
-                    <div class="produto-desc">2 Smach Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 85,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">COMBO SMACH BLEND</div>
+                    <div class="produto-desc">2 Smach Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
+                </div>
+                <div class="produto-preco">R$ 85,00</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
 
-        <div class="categoria">
-            <h2>🍟 ACOMPANHAMENTOS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Batata Frita 100g</div>
-                </div>
-                <div class="produto-preco">R$ 7,80</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
+        <div class="categoria">
+            <h2>🍟 ACOMPANHAMENTOS</h2>
+            
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Batata Frita 100g</div>
+                </div>
+                <div class="produto-preco">R$ 7,80</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+                    <span class="quantidade-num">0</span>
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
 
-        <div class="categoria">
-            <h2>🧀 ADICIONAIS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Cheddar</div>
-                </div>
-                <div class="produto-preco">R$ 3,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Picles</div>
-                </div>
-                <div class="produto-preco">R$ 3,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Bacon</div>
-                </div>
-                <div class="produto-preco">R$ 3,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Ovo</div>
-                </div>
-                <div class="produto-preco">R$ 3,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Carne 180g</div>
-                </div>
-                <div class="produto-preco">R$ 10,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Carne 120g</div>
-                </div>
-                <div class="produto-preco">R$ 8,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <h2>🥤 BEBIDAS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 6,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Refrigerante 2L</div>
-                </div>
-                <div class="produto-preco">R$ 12,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
+        <div class="categoria">
+            <h2>🧀 ADICIONAIS</h2>
+            
+            <div class="produto">
+                <div class="produto-info">
+                    <div class="produto-nome">Cheddar</div>
+                </div>
+                <div class="produto-preco">R$ 3,00</div>
+                <div class="quantidade">
+                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
         
-        <div class="endereco-loja">
-            <h3>📍 ENDEREÇO DA NOSSA LOJA</h3>
-            <p>Rua Coniston, 380 - B2</p>
-            <p>Jardim Canadá, Nova Lima - MG</p>
-            <p>📞 (31) 99212-8891</p>
-            <p>🕐 Quinta a Segunda: 18:30-23:00</p>
-        </div>
-    </div>
-
-    <div class="carrinho" onclick="verCarrinho()">
-        🛒 Ver Pedido (<span id="total-itens">0</span>)
-    </div>
-    
-    <div id="modal-checkout" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 200; padding-top: 50px; overflow-y: auto;">
-        <div class="modal-container">
-            <h2 style="color: #e0e0e0; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; margin-bottom: 20px;">Detalhes do Pedido</h2>
-            <div id="resumo-pedido" style="margin-bottom: 20px; padding: 15px; background: #444; border-radius: 8px;">
-                </div>
-
-            <h3 style="color: #e0e0e0; margin-bottom: 15px;">Dados para Entrega</h3>
-            <form id="form-pedido">
-                <div style="margin-bottom: 15px;">
-                    <label for="nome" style="display: block; margin-bottom: 5px;">Seu Nome:</label>
-                    <input type="text" id="nome" name="nome" required class="input-style">
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <label for="tel" style="display: block; margin-bottom: 5px;">Seu Telefone/WhatsApp (com DDD):</label>
-                    <input type="tel" id="tel" name="tel" required class="input-style">
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label for="bairro_select" style="display: block; margin-bottom: 5px;">Selecione o Bairro:</label>
-                    <select id="bairro_select" name="bairro" required class="input-style">
-                        </select>
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label for="rua_numero" style="display: block; margin-bottom: 5px;">Rua, Número e Complemento (Apto/Casa):</label>
-                    <textarea id="rua_numero" name="rua_numero" rows="3" required class="input-style"></textarea>
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <label for="pagamento" style="display: block; margin-bottom: 5px;">Forma de Pagamento:</label>
-                    <select id="pagamento" name="pagamento" required class="input-style">
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="Pix">PIX</option>
-                        <option value="Dinheiro">Dinheiro (com troco para?)</option>
-                        <option value="Cartao_Credito">Cartão de Crédito</option>
-                        <option value="Cartao_Debito">Cartão de Débito</option>
-                    </select>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <label for="mensagem" style="display: block; margin-bottom: 5px;">Observações (Ex: Sem picles, Troco para R$50,00):</label>
-                    <textarea id="mensagem" name="mensagem" rows="2" class="input-style"></textarea>
-                </div>
-
-                <button type="button" onclick="enviarPedido()" style="width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background 0.3s;">
-                    ✅ ENVIAR PEDIDO VIA WHATSAPP
-                </button>
-                
-                <button type="button" onclick="document.getElementById('modal-checkout').style.display = 'none';" style="width: 100%; padding: 10px; background: #555; color: white; border: none; border-radius: 5px; font-size: 1em; margin-top: 10px; cursor: pointer; transition: background 0.3s;">
-                    Cancelar
-                </button>
-
-                <p id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold; color: yellow; display: none;"></p>
-            </form>
-        </div>
-    </div>
-    
-    <script>
-        // 🟢 SEUS LINKS E VARIÁVEIS PRINCIPAIS
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzkLhyCYMQ7eKS-TpQhFyOXwrdbgBZJddccCL_VK6rtSr6DdsdHtwUJitokFzkLUEKt7l/exec"; 
-        const WHATSAPP_NUMERO = "5531992128891"; 
-
-        // 🟢 MAPA DE TAXAS POR BAIRRO
-        const TAXAS_POR_BAIRRO = {
-            "Jardim Canadá": 6.00,
-            "Retiro das Pedras": 10.00,
-            "Vale do Sol": 12.00,
-            "Alphaville": 15.00
-        };
+     
         
-        // Variáveis globais
-        let carrinhoItens = [];
-        let carrinhoTotalProdutos = 0; 
-        let carrinhoTotalFinal = 0;
-        
-        // 💡 FUNÇÃO PARA DETERMINAR O FRETE PELA SELEÇÃO
-        function obterTaxaDeEntrega(bairroSelecionado) {
-            if (!bairroSelecionado || bairroSelecionado === "") return 0;
-            // Usa o operador de coalescência nula (?? 0) como fallback, embora o select garanta o valor.
-            return TAXAS_POR_BAIRRO[bairroSelecionado] ?? 0;
-        }
-
-        // 💡 NOVA FUNÇÃO: Inicializa a lista suspensa de bairros
-        function inicializarBairros() {
-            const select = document.getElementById('bairro_select');
-            // Remove o placeholder antes de popular, se houver
-            select.innerHTML = '<option value="" disabled selected>Selecione o Bairro</option>'; 
-            
-            for (const bairro in TAXAS_POR_BAIRRO) {
-                const option = document.createElement('option');
-                option.value = bairro;
-                option.textContent = `${bairro} (R$ ${TAXAS_POR_BAIRRO[bairro].toFixed(2).replace('.', ',')})`;
-                select.appendChild(option);
-            }
-
-            // Garante que o evento de cálculo de frete está ligado à mudança de bairro
-            select.addEventListener('change', atualizarResumoCheckout);
-        }
-        
-        // ----------------------------------------------------
-        // Funções de Carrinho
-        // ----------------------------------------------------
-
-        function mudarQuantidade(botao, mudanca) {
-            const produto = botao.parentElement.parentElement;
-            const numero = produto.querySelector('.quantidade-num');
-            let quantidade = parseInt(numero.textContent);
-            
-            quantidade += mudanca;
-            if (quantidade < 0) quantidade = 0;
-            
-            numero.textContent = quantidade;
-            atualizarCarrinho();
-        }
-
-        function atualizarCarrinho() {
-            let totalItens = 0;
-            const produtos = document.querySelectorAll('.produto');
-            
-            produtos.forEach(produto => {
-                const quantidade = parseInt(produto.querySelector('.quantidade-num').textContent);
-                totalItens += quantidade;
-            });
-            
-            document.getElementById('total-itens').textContent = totalItens;
-        }
-
-        // ----------------------------------------------------
-        // Funções de Checkout
-        // ----------------------------------------------------
-
-        function atualizarResumoCheckout() {
-            const bairroSelecionado = document.getElementById('bairro_select').value; 
-            
-            let taxa = obterTaxaDeEntrega(bairroSelecionado); 
-            let resumoHTML = "<ul>";
-            
-            // 1. Calcula o total dos produtos
-            carrinhoTotalProdutos = 0;
-            carrinhoItens.forEach(item => {
-                carrinhoTotalProdutos += item.subtotal;
-                resumoHTML += `<li style="margin-bottom: 5px;">*${item.quantidade}x ${item.nome}* <span style="float: right;">R$ ${item.subtotal.toFixed(2).replace('.', ',')}</span></li>`;
-            });
-            
-            // 2. Aplica a taxa e a exibe
-            if (taxa > 0) {
-                const nomeBairro = bairroSelecionado;
-                resumoHTML += `<li>*🛵 Taxa de Entrega (${nomeBairro})* <span style="float: right;">R$ ${taxa.toFixed(2).replace('.', ',')}</span></li>`;
-            } else {
-                 resumoHTML += `<li>*🛵 Taxa de Entrega* <span style="float: right;">R$ 0,00</span></li>`;
-            }
-
-            // 3. Calcula o total final
-            carrinhoTotalFinal = carrinhoTotalProdutos + taxa;
-            
-            resumoHTML += `</ul><hr style="margin-top: 10px; border-color: #666;"><p style="font-size: 1.4em; font-weight: bold; margin-top: 10px;">TOTAL GERAL: <span style="float: right;">R$ ${carrinhoTotalFinal.toFixed(2).replace('.', ',')}</span></p>`;
-            
-            document.getElementById('resumo-pedido').innerHTML = resumoHTML;
-        }
-
-        function verCarrinho() {
-            carrinhoItens = [];
-            carrinhoTotalProdutos = 0;
-            
-            const produtos = document.querySelectorAll('.produto');
-            produtos.forEach(produto => {
-                const quantidade = parseInt(produto.querySelector('.quantidade-num').textContent);
-                const precoTexto = produto.querySelector('.produto-preco').textContent;
-                const preco = parseFloat(precoTexto.replace('R$ ', '').replace(',', '.'));
-                
-                if (quantidade > 0) {
-                    const subtotal = preco * quantidade;
-                    carrinhoItens.push({ 
-                        nome: produto.querySelector('.produto-nome').textContent, 
-                        quantidade: quantidade, 
-                        subtotal: subtotal 
-                    });
-                }
-            });
-
-            if (carrinhoItens.length === 0) {
-                alert("Seu carrinho está vazio! Adicione itens para continuar.");
-                return;
-            }
-
-            document.getElementById('modal-checkout').style.display = 'block';
-            inicializarBairros(); 
-            atualizarResumoCheckout(); 
-        }
-
-        // Envia para o Sheet e depois para o WhatsApp
-        async function enviarPedido() {
-            const feedback = document.getElementById('feedback');
-            feedback.style.display = 'none';
-            
-            const nome = document.getElementById('nome').value.trim();
-            const tel = document.getElementById('tel').value.trim();
-            const bairroSelecionado = document.getElementById('bairro_select').value;
-            const ruaNumero = document.getElementById('rua_numero').value.trim();
-            const pagamento = document.getElementById('pagamento').value;
-            const mensagem = document.getElementById('mensagem').value.trim();
-
-            const enderecoCompleto = `${ruaNumero}, Bairro: ${bairroSelecionado}`;
-
-            if (!nome || !tel || bairroSelecionado === "" || !ruaNumero || !pagamento) {
-                feedback.textContent = "⚠️ Por favor, preencha todos os campos obrigatórios!";
-                feedback.style.display = 'block';
-                return;
-            }
-            
-            atualizarResumoCheckout(); 
-            const taxaFinal = obterTaxaDeEntrega(bairroSelecionado);
-
-            // --- GERA MENSAGEM PARA WHATSAPP ---
-            let msgWA = `🎯 *NOVO PEDIDO - ARTESANAL BLEND* 🎯\n\n`;
-            msgWA += `*✅ DADOS DO CLIENTE:*\n`;
-            msgWA += `Nome: ${nome}\n`;
-            msgWA += `Telefone: ${tel}\n`;
-            msgWA += `Endereço: ${enderecoCompleto}\n`; 
-            msgWA += `Pagamento: ${pagamento}\n`;
-            msgWA += `Obs: ${mensagem || 'Nenhuma'}\n\n`;
-            
-            msgWA += `*📦 ITENS DO PEDIDO:*\n`;
-            carrinhoItens.forEach(item => {
-                msgWA += `*${item.quantidade}x* ${item.nome} (R$ ${item.subtotal.toFixed(2).replace('.', ',')})\n`;
-            });
-            
-            if (taxaFinal > 0) {
-                 msgWA += `\n🛵 *TAXA DE ENTREGA (${bairroSelecionado}): R$ ${taxaFinal.toFixed(2).replace('.', ',')}*`;
-            }
-
-            msgWA += `\n💰 *TOTAL GERAL: R$ ${carrinhoTotalFinal.toFixed(2).replace('.', ',')}*`;
-
-            // --- DADOS PARA O GOOGLE SHEET ---
-            const dadosRegistro = {
-                nome: nome,
-                tel: tel,
-                endereco: enderecoCompleto, 
-                pagamento: pagamento,
-                total: `R$ ${carrinhoTotalFinal.toFixed(2).replace('.', ',')}`,
-                mensagem: mensagem,
-                itens_pedido: carrinhoItens.map(i => `${i.quantidade}x ${i.nome}`).join(' | ') 
-            };
-
-            try {
-                feedback.textContent = "Registrando pedido...";
-                feedback.style.display = 'block';
-                
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dadosRegistro),
-                });
-                
-                const urlWA = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${encodeURIComponent(msgWA)}`;
-                window.open(urlWA, '_blank');
-                
-                document.getElementById('modal-checkout').style.display = 'none';
-                document.getElementById('form-pedido').reset();
-                alert("Seu pedido foi registrado e você será redirecionado para o WhatsApp para confirmar o envio!");
-
-            } catch (error) {
-                console.error('Erro ao enviar o pedido:', error);
-                feedback.textContent = `❌ Erro ao tentar registrar. Por favor, envie a mensagem diretamente pelo WhatsApp.`;
-            }
-        }
-
-        // Inicializar
-        atualizarCarrinho();
-        document.getElementById('pagamento').addEventListener('change', atualizarResumoCheckout); 
-    </script>
-</body>
-
-</html>
+       
+      
