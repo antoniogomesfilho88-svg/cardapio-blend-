@@ -1,360 +1,258 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burguer Artesanal Blend - Cardápio Online</title>
-    <style>
-        /* CSS COMPLETO */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background: #1a1a1a;
-            color: white;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            text-align: center;
-            background: #333;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #e0e0e0;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        
-        .header .subtitle {
-            font-size: 1.8em;
-            color: #e0e0e0;
-            font-weight: bold;
-        }
-        
-        .contact-info {
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .categoria {
-            background: #333;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 10px;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .categoria h2 {
-            color: #e0e0e0;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 5px;
-        }
-        
-        .produto {
-            background: #444;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
-        }
-        
-        .produto:hover {
-            transform: translateY(-2px);
-        }
-        
-        .produto-info {
-            flex: 1;
-        }
-        
-        .produto-nome {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #ffffff;
-        }
-        
-        .produto-desc {
-            color: #ccc;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .produto-preco {
-            color: #e0e0e0;
-            font-weight: bold;
-            margin: 0 15px;
-            font-size: 1.1em;
-        }
-        
-        .quantidade {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .btn-quantidade {
-            background: #e0e0e0;
-            color: #1a1a1a;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .btn-quantidade:hover {
-            background: #ffffff;
-        }
-        
-        .quantidade-num {
-            min-width: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        .carrinho {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #e0e0e0;
-            color: #1a1a1a;
-            padding: 15px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(224, 224, 224, 0.3);
-            transition: transform 0.3s;
-            z-index: 100;
-        }
-        
-        .carrinho:hover {
-            transform: scale(1.05);
-            background: #ffffff;
-        }
-        
-        .endereco-loja {
-            background: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-            border-left: 4px solid #e0e0e0;
-        }
-        
-        .endereco-loja h3 {
-            color: #e0e0e0;
-            margin-bottom: 10px;
-        }
-        
-        /* Estilos para o Modal de Checkout */
-        .modal-container {
-            max-width: 600px;
-            margin: 50px auto 20px auto; 
-            background: #333; 
-            padding: 25px; 
-            border-radius: 10px; 
-            border: 2px solid #e0e0e0;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Artesanal Blend - Cardápio Online</title>
 
-        .input-style {
-            width: 100%; 
-            padding: 10px; 
-            border-radius: 5px; 
-            border: none; 
-            background: #555; 
-            color: white;
-        }
-    </style>
+    <style>
+        /* CSS COMPLETO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #242424; /* Cor de fundo escura para o tema do seu cardápio */
+            color: #ffffff;    /* Cor do texto clara */
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ----------------------- Header ----------------------- */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-img {
+            width: 150px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #ff9900; /* Destaque para o nome */
+            margin: 0;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            color: #cccccc;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1em;
+            color: #999999;
+            margin-top: 5px;
+        }
+
+        /* ----------------------- Informações de Contato ----------------------- */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px solid #444;
+            border-top: 1px solid #444;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+        
+        /* Ícones e links */
+        .icon {
+            margin-right: 5px;
+            color: #ff9900;
+        }
+
+        .location-link {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ----------------------- Seções do Cardápio ----------------------- */
+        .menu-section {
+            margin-bottom: 40px;
+        }
+
+        .menu-section h3 {
+            font-size: 2em;
+            color: #ff9900;
+            border-bottom: 2px solid #ff9900;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* ----------------------- Item do Cardápio ----------------------- */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed #555;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-details h4 {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .item-details p {
+            font-size: 0.9em;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .item-price {
+            font-size: 1.3em;
+            color: #ff9900;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        /* ----------------------- Contador de Quantidade ----------------------- */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #555;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .quantity-control button {
+            background: #333;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .quantity-control button:hover {
+            background: #ff9900;
+        }
+
+        .quantity-control span {
+            padding: 0 15px;
+            font-size: 1em;
+            background: #444;
+        }
+
+        /* ----------------------- Responsividade para Mobile ----------------------- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 0;
+            }
+
+            .item-price {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size: 1.2em;
+                margin-right: 0; /* Remove margem extra no mobile */
+            }
+
+            .quantity-control {
+                margin-top: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>ARTESANAL</h1>
-            <div class="subtitle">-BLEND-</div>
-            <p>O Melhor Blend Artesanal</p>
-        </div>
-
-        <div class="contact-info">
-            <p>📞 (31) 99212-8891 | 📍 Rua Coniston, 380 - B2</p>
-            <p>🕐 Quinta a Segunda: 18:30-23:00 | 🛵 Entregamos</p>
-        </div>
-
-        <div class="categoria">
-            <h2>🍔 HAMBÚRGUERES</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Simples Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 21,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Clássico Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, picles, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 24,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Salada Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 23,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Bacon Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 29,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Smach Blend</div>
-                    <div class="produto-desc">Pão brioche, blend 180g, cheddar, bacon, ovo, cebola caramelizada, molho especial</div>
-                </div>
-                <div class="produto-preco">R$ 34,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <h2>🎯 COMBOS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO BACON BLEND 1</div>
-                    <div class="produto-desc">2 Bacon Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 76,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO BACON BLEND 3</div>
-                    <div class="produto-desc">3 Bacon Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 118,50</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO SIMPLES BLEND</div>
-                    <div class="produto-desc">3 Simples Blend + 3 Batata 100g + 3 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 89,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">COMBO SMACH BLEND</div>
-                    <div class="produto-desc">2 Smach Blend + 2 Batata 100g + 2 Refrigerante 350ml</div>
-                </div>
-                <div class="produto-preco">R$ 85,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <h2>🍟 ACOMPANHAMENTOS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Batata Frita 100g</div>
-                </div>
-                <div class="produto-preco">R$ 7,80</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
-                    <span class="quantidade-num">0</span>
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <h2>🧀 ADICIONAIS</h2>
-            
-            <div class="produto">
-                <div class="produto-info">
-                    <div class="produto-nome">Cheddar</div>
-                </div>
-                <div class="produto-preco">R$ 3,00</div>
-                <div class="quantidade">
-                    <button class="btn-quantidade" onclick="mudarQuantidade(this, -1)">-</button>
+    <div class="container">
         
-     
-        
-       
-      
+        <header class="header">
+            <img src="images/485885616_1209024550687160_3952789173301888589_n.jpg" alt="Logo Artesanal Blend" class="logo-img">
+            <h1>ARTESANAL - BLEND</h1>
+            <h2>O Melhor Blend Artesanal</h2>
+        </header>
+
+        <div class="contact-info">
+            <p>
+                <span class="icon">📞</span> (31) 99212-8891 
+                | 
+                <span class="icon">📍</span> <a href="LINK_DO_MAPS" target="_blank" class="location-link">Rua Coniston, 380 - B2</a>
+            </p>
+            <p>
+                <span class="icon">⏰</span> Quinta a Segunda: 18:30-23:00 
+                | 
+                <span class="icon">🛵</span> Entregamos
+            </p>
+        </div>
+
+        <section class="menu-section">
+            <h3>🍔 HAMBÚRGUERES</h3>
+            
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Simples Blend</h4>
+                    <p>Pão brioche, blend 120g, cheddar, molho especial</p>
+                </div>
+                <div class="item-price">R$ 21,00</div>
+                <div class="quantity-control">
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span>0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Clássico Blend</h4>
+                    <p>Pão brioche, blend 120g, cheddar, picles, molho especial</p>
+                </div>
+                <div class="item-price">R$ 24,00</div>
+                <div class="quantity-control">
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span>0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button>
+                </div>
+            </div>
+
+            </section>
+
+        </div>
+
+    <script>
+        function changeQuantity(button, delta) {
+            const span = button.parentNode.querySelector('span');
+            let currentQuantity = parseInt(span.textContent);
+            let newQuantity = currentQuantity + delta;
+
+            if (newQuantity >= 0) {
+                span.textContent = newQuantity;
+            }
+        }
+    </script>
+</body>
+</html>    
