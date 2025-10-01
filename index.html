@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       background-color: #000;
       color: #fff;
+      padding-bottom: 90px; /* Garante que o conteúdo não fique escondido pelo rodapé fixo */
     }
 
     /* HEADER LOGO */
@@ -51,7 +52,16 @@
     .product-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
+      margin-bottom: 5px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-name {
+      font-weight: bold;
       margin-bottom: 5px;
     }
 
@@ -60,6 +70,20 @@
       color: #ccc;
       margin-bottom: 8px;
       line-height: 1.4;
+    }
+
+    .product-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .product-price {
+      color: #ff5722;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: right;
     }
 
     .quantity-controls {
@@ -87,30 +111,47 @@
       font-weight: bold;
       min-width: 20px;
       text-align: center;
+      color: #fff;
     }
 
-    /* CARRINHO FIXO */
-    .cart {
+    /* --- INÍCIO: ESTILO DO CARRINHO FIXO EM FORMATO DE BOTÃO (VERDE) --- */
+
+    .carrinho-botao-container {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #111;
-      padding: 10px;
-      border-top: 1px solid #333;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; /* Para centralizar o botão */
+      justify-content: center; /* Centraliza horizontalmente */
+      padding: 15px 0; /* Espaçamento acima e abaixo do botão */
+      background: rgba(0,0,0,0.8); /* Fundo sutil para o rodapé */
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none; /* Inicia oculto e só aparece ao adicionar item (lógica no JS) */
     }
 
-    .cart button {
-      background: #4caf50;
+    .carrinho-botao {
+      background: #4caf50; /* A cor verde solicitada! */
       border: none;
-      padding: 10px 20px;
-      cursor: pointer;
+      padding: 15px 30px;
+      border-radius: 30px; /* Bordas arredondadas */
       color: #fff;
-      border-radius: 4px;
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .carrinho-botao:hover {
+      background-color: #43a047; /* Tom de verde mais escuro no hover */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    /* --- FIM: ESTILO DO CARRINHO FIXO EM FORMATO DE BOTÃO --- */
 
     /* MODAL */
     .modal {
@@ -135,13 +176,23 @@
       border-radius: 8px;
     }
 
-    .modal-content input, .modal-content select, .modal-content textarea {
+    .modal-content input, .modal-content select, .modal-content textarea, .modal-content button[type="submit"] {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       margin: 8px 0;
       border: none;
       border-radius: 4px;
+      box-sizing: border-box; 
+      font-size: 16px;
     }
+    
+    .modal-content button[type="submit"] {
+        background: #4caf50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
 
     .close {
       color: #aaa;
@@ -184,7 +235,6 @@
 </head>
 <body>
 
-  <!-- LOGO HEADER -->
   <header class="logo-header">
     <img src="logo.jpg" alt="Artesanal Blend Logo">
   </header>
@@ -195,120 +245,451 @@
     
     <div class="product">
       <div class="product-header">
-        <span><strong>CLASSICO BLEND - R$24,50</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('classico')">-</button>
-          <span class="quantity-display" id="classico-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('classico', 24.50)">+</button>
+        <div class="product-info">
+          <div class="product-name">CLASSICO BLEND</div>
+          <div class="product-description">
+            Pão brioche, blend 120g, cheddar, picles, molho especial
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        Pão brioche, blend 120g, cheddar, picles, molho especial
+        <div class="product-controls">
+          <div class="product-price">RS 24,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('classico')">-</button>
+            <span class="quantity-display" id="classico-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('classico', 24.50)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="product">
       <div class="product-header">
-        <span><strong>SALADA BLEND - R$23,50</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('salada')">-</button>
-          <span class="quantity-display" id="salada-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('salada', 23.50)">+</button>
+        <div class="product-info">
+          <div class="product-name">SALADA BLEND</div>
+          <div class="product-description">
+            Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial
+        <div class="product-controls">
+          <div class="product-price">RS 23,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('salada')">-</button>
+            <span class="quantity-display" id="salada-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('salada', 23.50)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="product">
       <div class="product-header">
-        <span><strong>BACON BLEND - R$29,50</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('bacon')">-</button>
-          <span class="quantity-display" id="bacon-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('bacon', 29.50)">+</button>
+        <div class="product-info">
+          <div class="product-name">BACON BLEND</div>
+          <div class="product-description">
+            Pão brioche, blend 180g, cheddar, bacon, molho especial
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        Pão brioche, blend 180g, cheddar, bacon, molho especial
+        <div class="product-controls">
+          <div class="product-price">RS 29,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('bacon')">-</button>
+            <span class="quantity-display" id="bacon-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('bacon', 29.50)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="product">
       <div class="product-header">
-        <span><strong>SMACH BLEND - R$34,50</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('smach')">-</button>
-          <span class="quantity-display" id="smach-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('smach', 34.50)">+</button>
+        <div class="product-info">
+          <div class="product-name">SMACH BLEND</div>
+          <div class="product-description">
+            Pão brioche, blend 180g, cheddar, bacon, 1 ovo, cebola caramelizada, molho especial
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        Pão brioche, blend 180g, cheddar, bacon, 1 ovo, cebola caramelizada, molho especial
+        <div class="product-controls">
+          <div class="product-price">RS 34,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('smach')">-</button>
+            <span class="quantity-display" id="smach-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('smach', 34.50)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="product">
       <div class="product-header">
-        <span><strong>SIMPLES BLEND - R$21,00</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('simples')">-</button>
-          <span class="quantity-display" id="simples-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('simples', 21.00)">+</button>
+        <div class="product-info">
+          <div class="product-name">SIMPLES BLEND</div>
+          <div class="product-description">
+            Pão brioche, blend 120g, cheddar, molho especial
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        Pão brioche, blend 120g, cheddar, molho especial
+        <div class="product-controls">
+          <div class="product-price">RS 21,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('simples')">-</button>
+            <span class="quantity-display" id="simples-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('simples', 21.00)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- CONTINUA COM OS OUTROS PRODUTOS NO MESMO PADRÃO -->
     <h2>Acompanhamentos</h2>
     <div class="product">
       <div class="product-header">
-        <span><strong>BATATA FRITA 100g - R$7,80</strong></span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('batata')">-</button>
-          <span class="quantity-display" id="batata-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('batata', 7.80)">+</button>
+        <div class="product-info">
+          <div class="product-name">BATATA FRITA 100g</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 7,80</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('batata')">-</button>
+            <span class="quantity-display" id="batata-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('batata', 7.80)">+</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ADICIONE OS DEMAIS PRODUTOS COM O MESMO PADRÃO -->
-    <!-- Para economizar espaço, vou mostrar apenas alguns exemplos -->
-
-    <h2>BEBIDAS</h2>
+    <h2>COMBOS</h2>
+    
     <div class="product">
       <div class="product-header">
-        <span>REFRIGERANTE 350ml - R$6,00</span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('refri350')">-</button>
-          <span class="quantity-display" id="refri350-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('refri350', 6.00)">+</button>
+        <div class="product-info">
+          <div class="product-name">BACON BLEND 1</div>
+          <div class="product-description">
+            1 BACON BLEND, 1 BATATA 100g, 1 REFRIGERANTE 350ml
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        coca cola zero, coca cola, fanta, guaraná
+        <div class="product-controls">
+          <div class="product-price">RS 38,25</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('bacon1')">-</button>
+            <span class="quantity-display" id="bacon1-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('bacon1', 38.25)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="product">
       <div class="product-header">
-        <span>REFRIGERANTE 2L - R$12,00</span>
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="decreaseQuantity('refri2l')">-</button>
-          <span class="quantity-display" id="refri2l-quantity">0</span>
-          <button class="quantity-btn" onclick="increaseQuantity('refri2l', 12.00)">+</button>
+        <div class="product-info">
+          <div class="product-name">BACON BLEND 2</div>
+          <div class="product-description">
+            2 BACON BLEND, 2 BATATA 100g, 2 REFRIGERANTE 350ml
+          </div>
         </div>
-      </div>
-      <div class="product-description">
-        coca cola, coca cola zero
+        <div class="product-controls">
+          <div class="product-price">RS 76,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('bacon2')">-</button>
+            <span class="quantity-display" id="bacon2-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('bacon2', 76.50)">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- INFORMAÇÕES DE CONTATO -->
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">BACON BLEND 3</div>
+          <div class="product-description">
+            3 BACON BLEND, 3 BATATA 100g, 3 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 118,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('bacon3')">-</button>
+            <span class="quantity-display" id="bacon3-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('bacon3', 118.50)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SIMPLES BLEND 1</div>
+          <div class="product-description">
+            1 SIMPLES BLEND, 1 BATATA 100g, 1 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 29,70</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('simples1')">-</button>
+            <span class="quantity-display" id="simples1-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('simples1', 29.70)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SIMPLES BLEND 2</div>
+          <div class="product-description">
+            2 SIMPLES BLEND, 2 BATATA 100g, 2 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 59,40</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('simples2')">-</button>
+            <span class="quantity-display" id="simples2-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('simples2', 59.40)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SIMPLES BLEND 3</div>
+          <div class="product-description">
+            3 SIMPLES BLEND, 3 BATATA 100g, 3 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 89,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('simples3')">-</button>
+            <span class="quantity-display" id="simples3-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('simples3', 89.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SALADA BLEND 1</div>
+          <div class="product-description">
+            1 SALADA BLEND, 1 BATATA 100g, 1 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 30,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('salada1')">-</button>
+            <span class="quantity-display" id="salada1-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('salada1', 30.50)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SMACH BLEND 1</div>
+          <div class="product-description">
+            1 SMACH BLEND, 1 BATATA 100g, 1 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 42,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('smach1')">-</button>
+            <span class="quantity-display" id="smach1-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('smach1', 42.50)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SMACH BLEND 2</div>
+          <div class="product-description">
+            2 SMACH BLEND, 2 BATATA 100g, 2 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 85,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('smach2')">-</button>
+            <span class="quantity-display" id="smach2-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('smach2', 85.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">CLASSICO BLEND 1</div>
+          <div class="product-description">
+            1 CLASSICO BLEND, 1 BATATA 100g, 1 REFRIGERANTE 350ml
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 31,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('classico1')">-</button>
+            <span class="quantity-display" id="classico1-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('classico1', 31.50)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>ADICIONAIS</h2>
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">CHEDDAR</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 3,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('cheddar')">-</button>
+            <span class="quantity-display" id="cheddar-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('cheddar', 3.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">PICLES</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 3,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('picles')">-</button>
+            <span class="quantity-display" id="picles-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('picles', 3.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">BACON</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 3,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('baconadicional')">-</button>
+            <span class="quantity-display" id="baconadicional-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('baconadicional', 3.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">OVO</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 3,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('ovo')">-</button>
+            <span class="quantity-display" id="ovo-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('ovo', 3.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">CARNE 180g</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 10,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('carne180')">-</button>
+            <span class="quantity-display" id="carne180-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('carne180', 10.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">CARNE 120g</div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 8,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('carne120')">-</button>
+            <span class="quantity-display" id="carne120-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('carne120', 8.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <h2>BEBIDAS</h2>
+
+<div class="product">
+  <div class="product-header">
+    <div class="product-info">
+      <div class="product-name">REFRIGERANTE 350ml</div>
+      <div class="product-description">
+        <strong>Sabores disponíveis:</strong><br>
+        COCA COLA | COCA COLA ZERO | FANTA | GUARANÁ<br>
+        <small>Observação: Especifique os sabores desejados no campo "Observações" do pedido</small>
+      </div>
+    </div>
+    <div class="product-controls">
+      <div class="product-price">R$ 6,00</div>
+      <div class="quantity-controls">
+        <button class="quantity-btn" onclick="decreaseQuantity('refri350')">-</button>
+        <span class="quantity-display" id="refri350-quantity">0</span>
+        <button class="quantity-btn" onclick="increaseQuantity('refri350', 6.00)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-header">
+    <div class="product-info">
+      <div class="product-name">REFRIGERANTE 2L</div>
+      <div class="product-description">
+        <strong>Sabores disponíveis:</strong><br>
+        COCA COLA | COCA COLA ZERO<br>
+        <small>Observação: Especifique os sabores desejados no campo "Observações" do pedido</small>
+      </div>
+    </div>
+    <div class="product-controls">
+      <div class="product-price">R$ 12,00</div>
+      <div class="quantity-controls">
+        <button class="quantity-btn" onclick="decreaseQuantity('refri2l')">-</button>
+        <span class="quantity-display" id="refri2l-quantity">0</span>
+        <button class="quantity-btn" onclick="increaseQuantity('refri2l', 12.00)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <div class="contact-info">
       <div class="contact-item">
         <span class="contact-icon">📞</span> (31) 99212-8891
@@ -326,13 +707,13 @@
 
   </div>
 
-  <!-- CARRINHO -->
-  <div class="cart">
-    <span id="cart-count">0 itens - Total: R$0,00</span>
-    <button onclick="openModal()">Finalizar Pedido</button>
+  <div class="carrinho-botao-container">
+    <button class="carrinho-botao" onclick="openModal()">
+      🛒 Ver Pedido (<span id="cart-count-value">0</span>) 
+    </button>
   </div>
 
-  <!-- MODAL CHECKOUT -->
+
   <div id="checkoutModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -340,121 +721,228 @@
       <form id="checkoutForm">
         <input type="text" id="nome" placeholder="Nome" required>
         <input type="text" id="telefone" placeholder="Telefone" required>
-        <input type="text" id="endereco" placeholder="Endereço" required>
-        <input type="text" id="bairro" placeholder="Bairro" required>
+        <input type="text" id="endereco" placeholder="Endereço (Rua e Número)" required>
+        
+        <select id="bairro-select" required onchange="updateCart()">
+            </select>
+        
         <select id="pagamento" required>
           <option value="">Forma de Pagamento</option>
           <option value="Dinheiro">Dinheiro</option>
           <option value="Pix">Pix</option>
           <option value="Cartão">Cartão</option>
         </select>
-        <textarea id="observacao" placeholder="Observações"></textarea>
+        <textarea id="observacao" placeholder="Observações (ex: Troco para R$50,00)"></textarea>
         <button type="submit">Enviar Pedido</button>
       </form>
     </div>
   </div>
 
-  <script>
-    let cart = [];
+<script>
+    // Tabela de Fretes APENAS com os bairros que você listou:
+    const fretes = {
+        "Selecione o Bairro": 0.00, // Opção padrão
+        "JARDIM CANADA": 6.00,
+        "RETIRO DAS PEDRAS": 10.00,
+        "VALE DO SOL": 12.00,
+        "ALPHAVILLE": 15.00,
+    };
+    
+    // Armazena as quantidades de cada produto.
     let quantities = {};
 
     function increaseQuantity(productId, price) {
-      if (!quantities[productId]) {
-        quantities[productId] = 0;
-      }
-      quantities[productId]++;
-      document.getElementById(productId + '-quantity').textContent = quantities[productId];
-      updateCart();
+        if (!quantities[productId]) {
+            quantities[productId] = 0;
+        }
+        quantities[productId]++;
+        document.getElementById(productId + '-quantity').textContent = quantities[productId];
+        updateCart();
     }
 
     function decreaseQuantity(productId) {
-      if (quantities[productId] && quantities[productId] > 0) {
-        quantities[productId]--;
-        document.getElementById(productId + '-quantity').textContent = quantities[productId];
-        updateCart();
-      }
+        if (quantities[productId] && quantities[productId] > 0) {
+            quantities[productId]--;
+            document.getElementById(productId + '-quantity').textContent = quantities[productId];
+            updateCart();
+        }
+    }
+
+    // Mapeia IDs para Nomes de Produto e Preços
+    function getProductDetails(productId) {
+        const details = {
+            'classico': { name: 'CLASSICO BLEND', price: 24.50 },
+            'salada': { name: 'SALADA BLEND', price: 23.50 },
+            'bacon': { name: 'BACON BLEND', price: 29.50 },
+            'smach': { name: 'SMACH BLEND', price: 34.50 },
+            'simples': { name: 'SIMPLES BLEND', price: 21.00 },
+            'batata': { name: 'BATATA FRITA 100g', price: 7.80 },
+            'bacon1': { name: 'COMBO BACON BLEND 1', price: 38.25 },
+            'bacon2': { name: 'COMBO BACON BLEND 2', price: 76.50 },
+            'bacon3': { name: 'COMBO BACON BLEND 3', price: 118.50 },
+            'simples1': { name: 'COMBO SIMPLES BLEND 1', price: 29.70 },
+            'simples2': { name: 'COMBO SIMPLES BLEND 2', price: 59.40 },
+            'simples3': { name: 'COMBO SIMPLES BLEND 3', price: 89.00 },
+            'salada1': { name: 'COMBO SALADA BLEND 1', price: 30.50 },
+            'smach1': { name: 'COMBO SMACH BLEND 1', price: 42.50 },
+            'smach2': { name: 'COMBO SMACH BLEND 2', price: 85.00 },
+            'classico1': { name: 'COMBO CLASSICO BLEND 1', price: 31.50 },
+            'cheddar': { name: 'CHEDDAR ADICIONAL', price: 3.00 },
+            'picles': { name: 'PICLES ADICIONAL', price: 3.00 },
+            'baconadicional': { name: 'BACON ADICIONAL', price: 3.00 },
+            'ovo': { name: 'OVO ADICIONAL', price: 3.00 },
+            'carne180': { name: 'CARNE 180g ADICIONAL', price: 10.00 },
+            'carne120': { name: 'CARNE 120g ADICIONAL', price: 8.00 },
+            'refri350': { name: 'REFRIGERANTE 350ml', price: 6.00 },
+            'refri2l': { name: 'REFRIGERANTE 2L', price: 12.00 }
+        };
+        // Mapeia os nomes dos produtos para o formato que você usou na simulação do WhatsApp (sem 'ADICIONAL' e capitalizados)
+        const productNamesForWhatsapp = {
+            'classico': 'Clássico Blend',
+            'salada': 'Salada Blend',
+            'bacon': 'Bacon Blend',
+            'smach': 'Smach Blend',
+            'simples': 'Simples Blend',
+            'batata': 'Batata Frita 100g',
+            'bacon1': 'Combo Bacon Blend 1',
+            'bacon2': 'Combo Bacon Blend 2',
+            'bacon3': 'Combo Bacon Blend 3',
+            'simples1': 'Combo Simples Blend 1',
+            'simples2': 'Combo Simples Blend 2',
+            'simples3': 'Combo Simples Blend 3',
+            'salada1': 'Combo Salada Blend 1',
+            'smach1': 'Combo Smach Blend 1',
+            'smach2': 'Combo Smach Blend 2',
+            'classico1': 'Combo Classico Blend 1',
+            'cheddar': 'Cheddar',
+            'picles': 'Picles',
+            'baconadicional': 'Bacon',
+            'ovo': 'Ovo',
+            'carne180': 'Carne 180g',
+            'carne120': 'Carne 120g',
+            'refri350': 'Refrigerante 350ml',
+            'refri2l': 'Refrigerante 2L'
+        };
+
+        const baseDetails = details[productId] || { name: productId, price: 0 };
+        // Usa o nome formatado para o WhatsApp, se existir
+        baseDetails.name = productNamesForWhatsapp[productId] || baseDetails.name;
+        
+        return baseDetails;
     }
 
     function updateCart() {
-      // Limpa o carrinho anterior
-      cart = [];
-      
-      // Adiciona itens baseado nas quantidades
-      for (const [productId, quantity] of Object.entries(quantities)) {
-        if (quantity > 0) {
-          const productName = getProductName(productId);
-          const price = getProductPrice(productId);
-          for (let i = 0; i < quantity; i++) {
-            cart.push({ product: productName, price: price });
-          }
+        let totalProdutos = 0;
+        let totalItems = 0;
+
+        // 1. Cálculo do valor dos produtos
+        for (const [productId, quantity] of Object.entries(quantities)) {
+            if (quantity > 0) {
+                const details = getProductDetails(productId);
+                totalProdutos += quantity * details.price;
+                totalItems += quantity;
+            }
         }
-      }
-      
-      // Atualiza display do carrinho
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      document.getElementById("cart-count").innerText = 
-        cart.length + " itens - Total: R$" + total.toFixed(2);
+        
+        // 2. Cálculo do Frete 
+        const bairroSelect = document.getElementById('bairro-select');
+        let custoFrete = 0;
+
+        if (bairroSelect && bairroSelect.value && bairroSelect.value !== "Selecione o Bairro") {
+            custoFrete = fretes[bairroSelect.value] || 0; 
+        }
+        
+        // Atualiza a contagem de itens no botão (layout verde)
+        document.getElementById("cart-count-value").innerText = totalItems;
+        
+        // Oculta/Exibe o botão do carrinho
+        document.querySelector('.carrinho-botao-container').style.display = totalItems > 0 ? 'flex' : 'none';
     }
 
-    function getProductName(productId) {
-      const names = {
-        'classico': 'CLASSICO BLEND',
-        'salada': 'SALADA BLEND',
-        'bacon': 'BACON BLEND',
-        'smach': 'SMACH BLEND',
-        'simples': 'SIMPLES BLEND',
-        'batata': 'BATATA FRITA 100g',
-        'refri350': 'REFRIGERANTE 350ml',
-        'refri2l': 'REFRIGERANTE 2L'
-        // Adicione os outros produtos aqui
-      };
-      return names[productId] || productId;
-    }
-
-    function getProductPrice(productId) {
-      const prices = {
-        'classico': 24.50,
-        'salada': 23.50,
-        'bacon': 29.50,
-        'smach': 34.50,
-        'simples': 21.00,
-        'batata': 7.80,
-        'refri350': 6.00,
-        'refri2l': 12.00
-        // Adicione os outros produtos aqui
-      };
-      return prices[productId] || 0;
+    // Função para preencher o dropdown de bairros
+    function populateBairroSelect() {
+        const select = document.getElementById('bairro-select');
+        for (const bairro in fretes) {
+            const option = document.createElement('option');
+            option.value = bairro;
+            // Exibe o nome do bairro e o valor do frete na opção
+            option.textContent = `${bairro} (R$${fretes[bairro].toFixed(2).replace('.', ',')})`;
+            select.appendChild(option);
+        }
     }
 
     function openModal() {
-      document.getElementById("checkoutModal").style.display = "block";
+        // Verifica se há itens antes de abrir o modal
+        let totalItems = 0;
+        for (const quantity of Object.values(quantities)) {
+            totalItems += quantity;
+        }
+
+        if (totalItems > 0) {
+            document.getElementById("checkoutModal").style.display = "block";
+            updateCart(); 
+        } else {
+            alert("Seu carrinho está vazio. Adicione itens para continuar!");
+        }
     }
 
     function closeModal() {
-      document.getElementById("checkoutModal").style.display = "none";
+        document.getElementById("checkoutModal").style.display = "none";
     }
 
-    document.getElementById("checkoutForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      let nome = document.getElementById("nome").value;
-      let telefone = document.getElementById("telefone").value;
-      let endereco = document.getElementById("endereco").value;
-      let bairro = document.getElementById("bairro").value;
-      let pagamento = document.getElementById("pagamento").value;
-      let observacao = document.getElementById("observacao").value;
+    // Função de envio para o WhatsApp - FORMATO EXATO
+document.getElementById("checkoutForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      let pedido = "Pedido de " + nome + "%0A";
-      cart.forEach(item => {
-        pedido += "- " + item.product + " R$" + item.price.toFixed(2) + "%0A";
-      });
-      pedido += "Endereço: " + endereco + " - " + bairro + "%0A";
-      pedido += "Pagamento: " + pagamento + "%0A";
-      pedido += "Observação: " + observacao + "%0A";
-      pedido += "Telefone: " + telefone;
+    // Coleta os dados
+    let nome = document.getElementById("nome").value;
+    let telefone = document.getElementById("telefone").value;
+    let endereco = document.getElementById("endereco").value;
+    let bairro = document.getElementById("bairro-select").value;
+    let pagamento = document.getElementById("pagamento").value;
+    let observacao = document.getElementById("observacao").value || "Nenhuma";
 
-      let url = "https://wa.me/5531992128891?text=" + pedido;
-      window.open(url, "_blank");
-    });
-  </script>
+    // Calcula totais
+    let totalProdutos = 0;
+    let mensagemItens = "";
+
+    for (const [productId, quantity] of Object.entries(quantities)) {
+        if (quantity > 0) {
+            const details = getProductDetails(productId);
+            const subtotal = quantity * details.price;
+            totalProdutos += subtotal;
+            mensagemItens += `*${quantity}x* ${details.name} (R$ ${subtotal.toFixed(2).replace('.', ',')})%0A`;
+        }
+    }
+
+    const custoFrete = fretes[bairro] || 0;
+    const totalGeral = totalProdutos + custoFrete;
+
+    // Monta a mensagem EXATA como você quer
+    let pedido = "🎯 *NOVO PEDIDO - ARTESANAL BLEND* 🎯%0A%0A";
+    pedido += "*✅ DADOS DO CLIENTE:*%0A";
+    pedido += `Nome: ${nome}%0A`;
+    pedido += `Telefone: ${telefone}%0A`;
+    pedido += `Endereço: ${endereco}, Bairro: ${bairro}%0A`;
+    pedido += `Pagamento: ${pagamento}%0A`;
+    pedido += `Obs: ${observacao}%0A%0A`;
+    
+    pedido += "*📦 ITENS DO PEDIDO:*%0A";
+    pedido += mensagemItens;
+    
+    pedido += `%0A🛵 *TAXA DE ENTREGA (${bairro}): R$ ${custoFrete.toFixed(2).replace('.', ',')}*%0A`;
+    pedido += `💰 *TOTAL GERAL: R$ ${totalGeral.toFixed(2).replace('.', ',')}*`;
+
+    // Envia
+    let url = "https://wa.me/5531992128891?text=" + pedido;
+    window.open(url, "_blank");
+    
+    closeModal();
+});
+
+    // Inicia o carrinho e o dropdown de bairros ao carregar a página
+    populateBairroSelect();
+    updateCart(); 
+</script>
 </body>
 </html>
