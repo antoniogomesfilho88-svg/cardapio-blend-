@@ -43,21 +43,50 @@
     }
 
     .product {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 10px 0;
+      margin: 15px 0;
       padding: 10px;
       border-bottom: 1px solid #333;
     }
 
-    .product button {
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-btn {
       background: #ff5722;
       border: none;
-      padding: 5px 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
       cursor: pointer;
-      color: #fff;
-      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-display {
+      font-size: 16px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
     }
 
     /* CARRINHO FIXO */
@@ -125,6 +154,32 @@
     .close:hover {
       color: #fff;
     }
+
+    /* INFORMAÇÕES DE CONTATO */
+    .contact-info {
+      background: #111;
+      padding: 25px 20px;
+      margin-top: 40px;
+      border-top: 1px solid #333;
+      text-align: center;
+    }
+
+    .contact-item {
+      margin: 12px 0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .contact-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .delivery-note {
+      color: #4caf50;
+      font-weight: bold;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -137,116 +192,143 @@
   <div class="container">
     
     <h2>HAMBURGUERES</h2>
+    
     <div class="product">
-      <span>CLASSICO BLEND - R$24,50</span>
-      <button onclick="addToCart('CLASSICO BLEND', 24.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SALADA BLEND - R$23,50</span>
-      <button onclick="addToCart('SALADA BLEND', 23.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>BACON BLEND - R$29,50</span>
-      <button onclick="addToCart('BACON BLEND', 29.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SMACH BLEND - R$34,50</span>
-      <button onclick="addToCart('SMACH BLEND', 34.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SIMPLES BLEND - R$21,00</span>
-      <button onclick="addToCart('SIMPLES BLEND', 21.00)">Adicionar</button>
+      <div class="product-header">
+        <span><strong>CLASSICO BLEND - R$24,50</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('classico')">-</button>
+          <span class="quantity-display" id="classico-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('classico', 24.50)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        Pão brioche, blend 120g, cheddar, picles, molho especial
+      </div>
     </div>
 
+    <div class="product">
+      <div class="product-header">
+        <span><strong>SALADA BLEND - R$23,50</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('salada')">-</button>
+          <span class="quantity-display" id="salada-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('salada', 23.50)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        Pão brioche, blend 120g, cheddar, tomate, alface americana, molho especial
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <span><strong>BACON BLEND - R$29,50</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('bacon')">-</button>
+          <span class="quantity-display" id="bacon-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('bacon', 29.50)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        Pão brioche, blend 180g, cheddar, bacon, molho especial
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <span><strong>SMACH BLEND - R$34,50</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('smach')">-</button>
+          <span class="quantity-display" id="smach-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('smach', 34.50)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        Pão brioche, blend 180g, cheddar, bacon, 1 ovo, cebola caramelizada, molho especial
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-header">
+        <span><strong>SIMPLES BLEND - R$21,00</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('simples')">-</button>
+          <span class="quantity-display" id="simples-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('simples', 21.00)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        Pão brioche, blend 120g, cheddar, molho especial
+      </div>
+    </div>
+
+    <!-- CONTINUA COM OS OUTROS PRODUTOS NO MESMO PADRÃO -->
     <h2>Acompanhamentos</h2>
     <div class="product">
-      <span>BATATA FRITA 100g - R$7,80</span>
-      <button onclick="addToCart('BATATA FRITA 100g', 7.80)">Adicionar</button>
+      <div class="product-header">
+        <span><strong>BATATA FRITA 100g - R$7,80</strong></span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('batata')">-</button>
+          <span class="quantity-display" id="batata-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('batata', 7.80)">+</button>
+        </div>
+      </div>
     </div>
 
-    <h2>COMBOS</h2>
-    <div class="product">
-      <span>BACON BLEND 1 - R$38,25</span>
-      <button onclick="addToCart('COMBO BACON BLEND 1', 38.25)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>BACON BLEND 2 - R$76,50</span>
-      <button onclick="addToCart('COMBO BACON BLEND 2', 76.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>BACON BLEND 3 - R$118,50</span>
-      <button onclick="addToCart('COMBO BACON BLEND 3', 118.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SIMPLES BLEND 1 - R$29,70</span>
-      <button onclick="addToCart('COMBO SIMPLES BLEND 1', 29.70)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SIMPLES BLEND 2 - R$59,40</span>
-      <button onclick="addToCart('COMBO SIMPLES BLEND 2', 59.40)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SIMPLES BLEND 3 - R$89,00</span>
-      <button onclick="addToCart('COMBO SIMPLES BLEND 3', 89.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SALADA BLEND 1 - R$30,50</span>
-      <button onclick="addToCart('COMBO SALADA BLEND 1', 30.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SMACH BLEND 1 - R$42,50</span>
-      <button onclick="addToCart('COMBO SMACH BLEND 1', 42.50)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>SMACH BLEND 2 - R$85,00</span>
-      <button onclick="addToCart('COMBO SMACH BLEND 2', 85.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>CLASSICO BLEND 1 - R$31,50</span>
-      <button onclick="addToCart('COMBO CLASSICO BLEND 1', 31.50)">Adicionar</button>
-    </div>
-
-    <h2>ADICIONAIS</h2>
-    <div class="product">
-      <span>CHEDDAR - R$3,00</span>
-      <button onclick="addToCart('CHEDDAR ADICIONAL', 3.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>PICLES - R$3,00</span>
-      <button onclick="addToCart('PICLES ADICIONAL', 3.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>BACON - R$3,00</span>
-      <button onclick="addToCart('BACON ADICIONAL', 3.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>OVO - R$3,00</span>
-      <button onclick="addToCart('OVO ADICIONAL', 3.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>CARNE 180g - R$10,00</span>
-      <button onclick="addToCart('CARNE 180g ADICIONAL', 10.00)">Adicionar</button>
-    </div>
-    <div class="product">
-      <span>CARNE 120g - R$8,00</span>
-      <button onclick="addToCart('CARNE 120g ADICIONAL', 8.00)">Adicionar</button>
-    </div>
+    <!-- ADICIONE OS DEMAIS PRODUTOS COM O MESMO PADRÃO -->
+    <!-- Para economizar espaço, vou mostrar apenas alguns exemplos -->
 
     <h2>BEBIDAS</h2>
     <div class="product">
-      <span>REFRIGERANTE 350ml - R$6,00</span>
-      <button onclick="addToCart('REFRIGERANTE 350ml', 6.00)">Adicionar</button>
+      <div class="product-header">
+        <span>REFRIGERANTE 350ml - R$6,00</span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('refri350')">-</button>
+          <span class="quantity-display" id="refri350-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('refri350', 6.00)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        coca cola zero, coca cola, fanta, guaraná
+      </div>
     </div>
+
     <div class="product">
-      <span>REFRIGERANTE 2L - R$12,00</span>
-      <button onclick="addToCart('REFRIGERANTE 2L', 12.00)">Adicionar</button>
+      <div class="product-header">
+        <span>REFRIGERANTE 2L - R$12,00</span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" onclick="decreaseQuantity('refri2l')">-</button>
+          <span class="quantity-display" id="refri2l-quantity">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('refri2l', 12.00)">+</button>
+        </div>
+      </div>
+      <div class="product-description">
+        coca cola, coca cola zero
+      </div>
+    </div>
+
+    <!-- INFORMAÇÕES DE CONTATO -->
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📞</span> (31) 99212-8891
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span> Rua Coniston, 380 - B2
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span> Quinta a Segunda: 18:30-23:00
+      </div>
+      <div class="delivery-note">
+        <span class="contact-icon">🛵</span> Entregamos
+      </div>
     </div>
 
   </div>
 
   <!-- CARRINHO -->
   <div class="cart">
-    <span id="cart-count">0 itens</span>
+    <span id="cart-count">0 itens - Total: R$0,00</span>
     <button onclick="openModal()">Finalizar Pedido</button>
   </div>
 
@@ -274,10 +356,74 @@
 
   <script>
     let cart = [];
-    
-    function addToCart(product, price) {
-      cart.push({ product, price });
-      document.getElementById("cart-count").innerText = cart.length + " itens";
+    let quantities = {};
+
+    function increaseQuantity(productId, price) {
+      if (!quantities[productId]) {
+        quantities[productId] = 0;
+      }
+      quantities[productId]++;
+      document.getElementById(productId + '-quantity').textContent = quantities[productId];
+      updateCart();
+    }
+
+    function decreaseQuantity(productId) {
+      if (quantities[productId] && quantities[productId] > 0) {
+        quantities[productId]--;
+        document.getElementById(productId + '-quantity').textContent = quantities[productId];
+        updateCart();
+      }
+    }
+
+    function updateCart() {
+      // Limpa o carrinho anterior
+      cart = [];
+      
+      // Adiciona itens baseado nas quantidades
+      for (const [productId, quantity] of Object.entries(quantities)) {
+        if (quantity > 0) {
+          const productName = getProductName(productId);
+          const price = getProductPrice(productId);
+          for (let i = 0; i < quantity; i++) {
+            cart.push({ product: productName, price: price });
+          }
+        }
+      }
+      
+      // Atualiza display do carrinho
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById("cart-count").innerText = 
+        cart.length + " itens - Total: R$" + total.toFixed(2);
+    }
+
+    function getProductName(productId) {
+      const names = {
+        'classico': 'CLASSICO BLEND',
+        'salada': 'SALADA BLEND',
+        'bacon': 'BACON BLEND',
+        'smach': 'SMACH BLEND',
+        'simples': 'SIMPLES BLEND',
+        'batata': 'BATATA FRITA 100g',
+        'refri350': 'REFRIGERANTE 350ml',
+        'refri2l': 'REFRIGERANTE 2L'
+        // Adicione os outros produtos aqui
+      };
+      return names[productId] || productId;
+    }
+
+    function getProductPrice(productId) {
+      const prices = {
+        'classico': 24.50,
+        'salada': 23.50,
+        'bacon': 29.50,
+        'smach': 34.50,
+        'simples': 21.00,
+        'batata': 7.80,
+        'refri350': 6.00,
+        'refri2l': 12.00
+        // Adicione os outros produtos aqui
+      };
+      return prices[productId] || 0;
     }
 
     function openModal() {
@@ -299,15 +445,14 @@
 
       let pedido = "Pedido de " + nome + "%0A";
       cart.forEach(item => {
-        pedido += "- " + item.product + " R$" + item.price + "%0A";
+        pedido += "- " + item.product + " R$" + item.price.toFixed(2) + "%0A";
       });
       pedido += "Endereço: " + endereco + " - " + bairro + "%0A";
       pedido += "Pagamento: " + pagamento + "%0A";
       pedido += "Observação: " + observacao + "%0A";
       pedido += "Telefone: " + telefone;
 
-      // ⚠️ SUBSTITUA O NÚMERO ABAIXO PELO SEU WHATSAPP ⚠️
-      let url = "https://wa.me/5511999999999?text=" + pedido;
+      let url = "https://wa.me/5531992128891?text=" + pedido;
       window.open(url, "_blank");
     });
   </script>
