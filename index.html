@@ -18,7 +18,7 @@
       background: #111;
       padding: 15px;
       border-bottom: 1px solid #333;
-      position: sticky; /* fixo no topo */
+      position: sticky;
       top: 0;
       z-index: 1000;
     }
@@ -135,29 +135,113 @@
   </header>
 
   <div class="container">
-    <h2>Lanches</h2>
+    
+    <h2>HAMBURGUERES</h2>
     <div class="product">
-      <span>X-Burger</span>
-      <button onclick="addToCart('X-Burger', 20)">Adicionar - R$20</button>
+      <span>CLASSICO BLEND - R$24,50</span>
+      <button onclick="addToCart('CLASSICO BLEND', 24.50)">Adicionar</button>
     </div>
     <div class="product">
-      <span>X-Salada</span>
-      <button onclick="addToCart('X-Salada', 22)">Adicionar - R$22</button>
+      <span>SALADA BLEND - R$23,50</span>
+      <button onclick="addToCart('SALADA BLEND', 23.50)">Adicionar</button>
     </div>
     <div class="product">
-      <span>X-Bacon</span>
-      <button onclick="addToCart('X-Bacon', 25)">Adicionar - R$25</button>
+      <span>BACON BLEND - R$29,50</span>
+      <button onclick="addToCart('BACON BLEND', 29.50)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SMACH BLEND - R$34,50</span>
+      <button onclick="addToCart('SMACH BLEND', 34.50)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SIMPLES BLEND - R$21,00</span>
+      <button onclick="addToCart('SIMPLES BLEND', 21.00)">Adicionar</button>
     </div>
 
-    <h2>Bebidas</h2>
+    <h2>Acompanhamentos</h2>
     <div class="product">
-      <span>Coca-Cola Lata</span>
-      <button onclick="addToCart('Coca-Cola Lata', 6)">Adicionar - R$6</button>
+      <span>BATATA FRITA 100g - R$7,80</span>
+      <button onclick="addToCart('BATATA FRITA 100g', 7.80)">Adicionar</button>
+    </div>
+
+    <h2>COMBOS</h2>
+    <div class="product">
+      <span>BACON BLEND 1 - R$38,25</span>
+      <button onclick="addToCart('COMBO BACON BLEND 1', 38.25)">Adicionar</button>
     </div>
     <div class="product">
-      <span>Guaraná Lata</span>
-      <button onclick="addToCart('Guaraná Lata', 5)">Adicionar - R$5</button>
+      <span>BACON BLEND 2 - R$76,50</span>
+      <button onclick="addToCart('COMBO BACON BLEND 2', 76.50)">Adicionar</button>
     </div>
+    <div class="product">
+      <span>BACON BLEND 3 - R$118,50</span>
+      <button onclick="addToCart('COMBO BACON BLEND 3', 118.50)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SIMPLES BLEND 1 - R$29,70</span>
+      <button onclick="addToCart('COMBO SIMPLES BLEND 1', 29.70)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SIMPLES BLEND 2 - R$59,40</span>
+      <button onclick="addToCart('COMBO SIMPLES BLEND 2', 59.40)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SIMPLES BLEND 3 - R$89,00</span>
+      <button onclick="addToCart('COMBO SIMPLES BLEND 3', 89.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SALADA BLEND 1 - R$30,50</span>
+      <button onclick="addToCart('COMBO SALADA BLEND 1', 30.50)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SMACH BLEND 1 - R$42,50</span>
+      <button onclick="addToCart('COMBO SMACH BLEND 1', 42.50)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>SMACH BLEND 2 - R$85,00</span>
+      <button onclick="addToCart('COMBO SMACH BLEND 2', 85.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>CLASSICO BLEND 1 - R$31,50</span>
+      <button onclick="addToCart('COMBO CLASSICO BLEND 1', 31.50)">Adicionar</button>
+    </div>
+
+    <h2>ADICIONAIS</h2>
+    <div class="product">
+      <span>CHEDDAR - R$3,00</span>
+      <button onclick="addToCart('CHEDDAR ADICIONAL', 3.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>PICLES - R$3,00</span>
+      <button onclick="addToCart('PICLES ADICIONAL', 3.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>BACON - R$3,00</span>
+      <button onclick="addToCart('BACON ADICIONAL', 3.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>OVO - R$3,00</span>
+      <button onclick="addToCart('OVO ADICIONAL', 3.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>CARNE 180g - R$10,00</span>
+      <button onclick="addToCart('CARNE 180g ADICIONAL', 10.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>CARNE 120g - R$8,00</span>
+      <button onclick="addToCart('CARNE 120g ADICIONAL', 8.00)">Adicionar</button>
+    </div>
+
+    <h2>BEBIDAS</h2>
+    <div class="product">
+      <span>REFRIGERANTE 350ml - R$6,00</span>
+      <button onclick="addToCart('REFRIGERANTE 350ml', 6.00)">Adicionar</button>
+    </div>
+    <div class="product">
+      <span>REFRIGERANTE 2L - R$12,00</span>
+      <button onclick="addToCart('REFRIGERANTE 2L', 12.00)">Adicionar</button>
+    </div>
+
   </div>
 
   <!-- CARRINHO -->
@@ -222,7 +306,8 @@
       pedido += "Observação: " + observacao + "%0A";
       pedido += "Telefone: " + telefone;
 
-      let url = "https://wa.me/55SEUNUMERO?text=" + pedido;
+      // ⚠️ SUBSTITUA O NÚMERO ABAIXO PELO SEU WHATSAPP ⚠️
+      let url = "https://wa.me/5511999999999?text=" + pedido;
       window.open(url, "_blank");
     });
   </script>
