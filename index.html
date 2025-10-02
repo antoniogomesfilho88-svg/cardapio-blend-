@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -300,6 +300,26 @@
       </div>
     </div>
 
+    <!-- NOVO PRODUTO 1: BACON BLEND 120g -->
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">BACON BLEND 120g</div>
+          <div class="product-description">
+            Pão brioche, blend 120g, cheddar, bacon, molho especial
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 27,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('bacon120')">-</button>
+            <span class="quantity-display" id="bacon120-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('bacon120', 27.00)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="product">
       <div class="product-header">
         <div class="product-info">
@@ -314,6 +334,26 @@
             <button class="quantity-btn" onclick="decreaseQuantity('smach')">-</button>
             <span class="quantity-display" id="smach-quantity">0</span>
             <button class="quantity-btn" onclick="increaseQuantity('smach', 34.50)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOVO PRODUTO 2: SMACH BLEND 120g -->
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">SMACH BLEND 120g</div>
+          <div class="product-description">
+            Pão brioche, blend 120g, cheddar, bacon, 1 ovo, cebola caramelizada, molho especial
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 32,50</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('smach120')">-</button>
+            <span class="quantity-display" id="smach120-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('smach120', 32.50)">+</button>
           </div>
         </div>
       </div>
@@ -644,51 +684,44 @@
       </div>
     </div>
 
-   <h2>BEBIDAS</h2>
-
-<div class="product">
-  <div class="product-header">
-    <div class="product-info">
-      <div class="product-name">REFRIGERANTE 350ml</div>
-      <div class="product-description">
-        <strong>Sabores disponíveis:</strong><br>
-        COCA COLA | COCA COLA ZERO | FANTA | GUARANÁ<br>
-        <small>Observação: Especifique os sabores desejados no campo "Observações" do pedido</small>
+    <h2>BEBIDAS</h2>
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">REFRIGERANTE 350ml</div>
+          <div class="product-description">
+            coca cola zero, coca cola, fanta, guaraná
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 6,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('refri350')">-</button>
+            <span class="quantity-display" id="refri350-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('refri350', 6.00)">+</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="product-controls">
-      <div class="product-price">R$ 6,00</div>
-      <div class="quantity-controls">
-        <button class="quantity-btn" onclick="decreaseQuantity('refri350')">-</button>
-        <span class="quantity-display" id="refri350-quantity">0</span>
-        <button class="quantity-btn" onclick="increaseQuantity('refri350', 6.00)">+</button>
+
+    <div class="product">
+      <div class="product-header">
+        <div class="product-info">
+          <div class="product-name">REFRIGERANTE 2L</div>
+          <div class="product-description">
+            coca cola, coca cola zero
+          </div>
+        </div>
+        <div class="product-controls">
+          <div class="product-price">RS 12,00</div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="decreaseQuantity('refri2l')">-</button>
+            <span class="quantity-display" id="refri2l-quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('refri2l', 12.00)">+</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="product">
-  <div class="product-header">
-    <div class="product-info">
-      <div class="product-name">REFRIGERANTE 2L</div>
-      <div class="product-description">
-        <strong>Sabores disponíveis:</strong><br>
-        COCA COLA | COCA COLA ZERO<br>
-        <small>Observação: Especifique os sabores desejados no campo "Observações" do pedido</small>
-      </div>
-    </div>
-    <div class="product-controls">
-      <div class="product-price">R$ 12,00</div>
-      <div class="quantity-controls">
-        <button class="quantity-btn" onclick="decreaseQuantity('refri2l')">-</button>
-        <span class="quantity-display" id="refri2l-quantity">0</span>
-        <button class="quantity-btn" onclick="increaseQuantity('refri2l', 12.00)">+</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
     <div class="contact-info">
       <div class="contact-item">
@@ -774,7 +807,9 @@
             'classico': { name: 'CLASSICO BLEND', price: 24.50 },
             'salada': { name: 'SALADA BLEND', price: 23.50 },
             'bacon': { name: 'BACON BLEND', price: 29.50 },
+            'bacon120': { name: 'BACON BLEND 120g', price: 27.00 }, // NOVO PRODUTO
             'smach': { name: 'SMACH BLEND', price: 34.50 },
+            'smach120': { name: 'SMACH BLEND 120g', price: 32.50 }, // NOVO PRODUTO
             'simples': { name: 'SIMPLES BLEND', price: 21.00 },
             'batata': { name: 'BATATA FRITA 100g', price: 7.80 },
             'bacon1': { name: 'COMBO BACON BLEND 1', price: 38.25 },
@@ -801,7 +836,9 @@
             'classico': 'Clássico Blend',
             'salada': 'Salada Blend',
             'bacon': 'Bacon Blend',
+            'bacon120': 'Bacon Blend 120g', // NOVO PRODUTO
             'smach': 'Smach Blend',
+            'smach120': 'Smach Blend 120g', // NOVO PRODUTO
             'simples': 'Simples Blend',
             'batata': 'Batata Frita 100g',
             'bacon1': 'Combo Bacon Blend 1',
